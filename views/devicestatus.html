@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <title>This is the Avalon Smart Home</title>
+    </head>
+    <body>
+        <h1> Avalon Smart Home </h1>
+        <h3> Device Status </h3>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/adddevice">Add Device</a></li>
+            <li><a href="/devicestatus">Device Status</a></li>
+            <li><a href="/controldevice">Control Device</a></li>
+            <li><a href="/deletedevice">Delete Device</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+        <p>
+            here you can see the Status-----------
+        </p>
+        <form action="/devicestatus1" method="GET" onsubmit="validateForm()">
+            <label for="device_selector">Choose a device:</label>
+            <select id="device_selector" name="device_selector">
+                <% availabledata.forEach(function(device_d){ %>
+                    <option><%= "id number "+device_d.id+" -> "+device_d.name %></option>
+                <% }) %>
+            </select>
+            <input type="submit">
+        </form>
+        <script>
+            function validateForm() {
+                alert("device status shown");  
+            }
+        </script>
+    </body>
+</html>

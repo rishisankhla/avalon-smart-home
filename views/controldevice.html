@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+    <head>
+        <title>This is the Avalon Smart Home</title>
+    </head>
+    <body>
+        <h1> Avalon Smart Home </h1>
+        <h3> Control and Update Device Settings </h3>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/adddevice">Add Device</a></li>
+            <li><a href="/devicestatus">Device Status</a></li>
+            <li><a href="/controldevice">Control Device</a></li>
+            <li><a href="/deletedevice">Delete Device</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+        <p>
+            here you can control the device settings-----------
+        </p>
+        <table>
+            <% availabledata.forEach(function(device_d){ %>
+                <%var i_id= device_d.id %>
+                <tr id="tab_row" style="display:none;" class= <%= device_d.id %>>
+                    <td>id = "<%= device_d.id %>"</td>
+                    <td>name = "<%= device_d.name %>"</td>
+                    <td>type = "<%= device_d.type %>"</td>
+                    <td>on/off = "<%= device_d.on_off %>"</td>
+                    <td>temperature = "<%= device_d.temp %>"</td>
+                    <td>volume = "<%= device_d.volume %>"</td>
+                    <td>brightness = "<%= device_d.brightness %>"</td>
+                    <td>speed = "<%= device_d.speed %>"</td>
+                    <td>song = "<%= device_d.song %>"</td>
+                    <td>color = "<%= device_d.color %>"</td>
+                    <td>timer = "<%= device_d.timer %>"</td>
+                    <td>direction = "<%= device_d.direction %>"</td>
+                </tr>
+            <% }) %>
+        </table>
+
+        <form action="/controldevice1" method="POST" onsubmit="validateForm()">
+            <label for="control_device_selector">First choose a device to update its setting:</label>
+            <select id="control_device_selector" name="control_device_selector" onchange="myFunction_1()">
+                <% availabledata.forEach(function(device_d){ %>
+                    <option><%= "id number "+device_d.id+" -> "+device_d.name+" ("+device_d.type+")" %></option>
+                <% }) %>
+            </select>
+            <input type="submit">
+            <br>
+            <label class="setting_change" style="display:none;" id="lblName0">write on/off in string =</label>
+            <input class="setting_change" style="display:none;" id="device_setting_1" type="text" name="on_off">
+            <br>
+            <label class="setting_change" style="display:none;" id="lblName1"></label>
+            <input class="setting_change" style="display:none;" id="device_setting_2" type="text" >
+            <br>
+            <label class="setting_change" style="display:none;" id="lblName2"></label>
+            <input class="setting_change" style="display:none;" id="device_setting_3" type="text" >
+            <script>
+                function myFunction_1(){
+                    var type_selector = document.getElementById("control_device_selector");
+                    for(var i=0;i<type_selector.options.length;i++)
+                    {
+                        var s_1 = type_selector.options[i].text;
+                        s_1=s_1.replace('id number ','');
+                        var our_id_i = document.getElementsByClassName(parseInt(s_1))[0];
+                        our_id_i.style.display='none';
+                    }
+                    var our_st = type_selector.options[type_selector.selectedIndex].text;
+                    our_st = our_st.replace('id number ','');
+                    var our_id = document.getElementsByClassName(parseInt(our_st))[0];
+                    our_id.style.display='block';
+                    var device_setting_2 = document.getElementById("device_setting_2");
+                    var device_setting_3 = document.getElementById("device_setting_3");
+                    var our_index = type_selector.options[type_selector.selectedIndex].text.indexOf("(");
+                    var our_current_type = type_selector.options[type_selector.selectedIndex].text.split("(")[1].split(")")[0];
+                    var setting_change = document.getElementsByClassName('setting_change');
+                    for (var i=0;i<setting_change.length;i+=1){
+                        setting_change[i].style.display = 'inline';
+                    }
+                    if(our_current_type=="fan")
+                    {
+                        device_setting_2.name = "speed";
+                        device_setting_3.name = "direction";
+                        document.getElementById('lblName1').innerHTML = 'specify speed in int =';
+                        document.getElementById('lblName2').innerHTML = 'write the new direction in string =';
+                    }
+                    if(our_current_type=="heater")
+                    {
+                        device_setting_2.name = "temp";
+                        device_setting_3.name = "speed";
+                        document.getElementById('lblName1').innerHTML = 'specify temperature in int =';
+                        document.getElementById('lblName2').innerHTML = 'specify speed in int =';
+                    }
+                    if(our_current_type=="light")
+                    {
+                        device_setting_2.name = "brightness";
+                        device_setting_3.name = "color";
+                        document.getElementById('lblName1').innerHTML = 'specify brightness in int =';
+                        document.getElementById('lblName2').innerHTML = 'write the new color in string =';
+                    }
+                    if(our_current_type=="kitchen")
+                    {
+                        device_setting_2.name = "temp";
+                        device_setting_3.name = "timer";
+                        document.getElementById('lblName1').innerHTML = 'specify temperature in int =';
+                        document.getElementById('lblName2').innerHTML = 'specify timer in int =';
+                    }
+                    if(our_current_type=="audio")
+                    {
+                        device_setting_2.name = "volume";
+                        device_setting_3.name = "song";
+                        document.getElementById('lblName1').innerHTML = 'specify volume in int =';
+                        document.getElementById('lblName2').innerHTML = 'write the new song name in string =';
+                    }
+                }
+            </script>
+        </form>
+        <script>
+            function validateForm() {
+                alert("device setting changed");
+            }
+        </script>
+    </body>
+</html>

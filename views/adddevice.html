@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+    <head>
+        <title>This is the Avalon Smart Home</title>
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <h1> Avalon Smart Home </h1>
+        <h3> Add Device </h3>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/adddevice">Add Device</a></li>
+            <li><a href="/devicestatus">Device Status</a></li>
+            <li><a href="/controldevice">Control Device</a></li>
+            <li><a href="/deletedevice">Delete Device</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+        <p>
+            here you can add devices-----------
+        </p>
+        <form action="/adddevice1" method="POST" onsubmit="validateForm()">
+            <label for="type_selector">Select type:</label>
+            <select id="type_selector" name="type_selector" onchange="myFunction_1()">
+                <option value="audio">audio</option>
+                <option value="heater">heater</option>
+                <option selected="selected" value="light">light</option>
+                <option value="fan">fan</option>
+                <option value="kitchen">kitchen</option>
+            </select>
+            <br>
+            <label for="on_off">Select on/off:</label>
+            <select id="on_off" name="on_off">
+                <option value="on">on</option>
+                <option value="off">off</option>
+            </select>
+            <br>
+            <label for="device_name">Write device name:</label>
+            <input id="device_name" type="text" name="device_name" value="xyz name" onchange="myFunction_2()"><input type="submit">
+            <br>
+            <label class="device_name_a device_name_c" for="device_volume" style="display:none;">volume in int:</label>
+            <input class="device_name_a device_name_c" id="device_volume" type="text" name="device_volume" value="null" style="display:none;">
+            <br>
+            <label class="device_name_a device_name_c" for="device_song" style="display:none;">song in string:</label>
+            <input class="device_name_a device_name_c" id="device_song" type="text" name="device_song" value="null" style="display:none;">
+            <br>
+            <label class="device_name_k device_name_c device_name_h" for="device_temperature" style="display:none;">temperature in int:</label>
+            <input class="device_name_k device_name_c device_name_h" id="device_temperature" type="text" name="device_temperature" value="null" style="display:none;">
+            <br>
+            <label class="device_name_h device_name_c device_name_f" for="device_speed" style="display:none;">speed in int:</label>
+            <input class="device_name_h device_name_c device_name_f" id="device_speed" type="text" name="device_speed" value="null" style="display:none;">
+            <br>
+            <label class="device_name_k device_name_c" for="device_timer" style="display:none;">timer in int:</label>
+            <input class="device_name_k device_name_c" id="device_timer" type="text" name="device_timer" value="null" style="display:none;">
+            <br>
+            <label class="device_name_l device_name_c" for="device_brightness">brightness in int:</label>
+            <input class="device_name_l device_name_c" id="device_brightness" type="text" name="device_brightness" value="null">
+            <br>
+            <label class="device_name_l device_name_c" for="device_color">color in string:</label>
+            <input class="device_name_l device_name_c" id="device_color" type="text" name="device_color" value="null">
+            <br>
+            <label class="device_name_f device_name_c" for="device_direction" style="display:none;">direction in string (right/left):</label>
+            <input class="device_name_f device_name_c" id="device_direction" type="text" name="device_direction" value="null" style="display:none;">
+            <br>
+            <script>
+                function validateForm() {
+                    alert("added device to the database");
+                }
+            </script>
+            <script>
+                function myFunction_2() {
+                    var x = document.getElementById("device_name");
+                    x.value = x.value.toLowerCase();
+                }
+                function myFunction_1(){
+                    var type_selector = document.getElementById("type_selector");
+                    var elems = document.getElementsByClassName("device_name_c");
+                    for (var i=0;i<elems.length;i+=1){
+                        elems[i].style.display = 'none';
+                    }
+                    if(type_selector.options[type_selector.selectedIndex].text == "kitchen"){
+                        var elems = document.getElementsByClassName("device_name_k");
+                        for (var i=0;i<elems.length;i+=1){
+                            elems[i].style.display = 'inline';
+                        }
+                    }
+                    if(type_selector.options[type_selector.selectedIndex].text == "audio"){
+                        var elems = document.getElementsByClassName("device_name_a");
+                        for (var i=0;i<elems.length;i+=1){
+                            elems[i].style.display = 'inline';
+                        }
+                    }
+                    if(type_selector.options[type_selector.selectedIndex].text == "fan"){
+                        var elems = document.getElementsByClassName("device_name_f");
+                        for (var i=0;i<elems.length;i+=1){
+                            elems[i].style.display = 'inline';
+                        }
+                    }
+                    if(type_selector.options[type_selector.selectedIndex].text == "light"){
+                        var elems = document.getElementsByClassName("device_name_l");
+                        for (var i=0;i<elems.length;i+=1){
+                            elems[i].style.display = 'inline';
+                        }
+                    }
+                    if(type_selector.options[type_selector.selectedIndex].text == "heater"){
+                        var elems = document.getElementsByClassName("device_name_h");
+                        for (var i=0;i<elems.length;i+=1){
+                            elems[i].style.display = 'inline';
+                        }
+                    }
+                }
+            </script>
+        </form>
+    </body>
+</html>

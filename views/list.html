@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+ <head>
+ <title>This is the Avalon Smart Home</title>
+ </head>
+ <body>
+ <h1> Avalon Smart Home </h1>
+ <ul>
+    <li><a href="/home">Home</a></li>
+    <li><a href="/adddevice">Add Device</a></li>
+    <li><a href="/devicestatus">Device Status</a></li>
+    <li><a href="/controldevice">Control Device</a></li>
+    <li><a href="/deletedevice">Delete Device</a></li>
+    <li><a href="/about">About</a></li>
+  </ul>
+<h3> Selected Device Status: </h3>
+ <p>
+    Your device name is <%= available_data[0].name %>, and its primary key is "<%= available_data[0].id %>".
+    Properties of Your device are:
+    <ul>
+        <li>Type: <%= available_data[0].type %> </li>
+        <li>On/Off: <%= available_data[0].on_off %> </li>
+        <% if(available_data[0].temp != null){ %>
+            <li>Temperature: <%= available_data[0].temp %> </li>
+        <% }; %>
+        <% if(available_data[0].volume != null){ %>
+            <li>Volume: <%= available_data[0].volume %> </li>
+        <% }; %>
+        <% if(available_data[0].brightness != null){ %>
+            <li>Brightness: <%= available_data[0].brightness %> </li>
+        <% }; %>
+        <% if(available_data[0].speed != null){ %>
+            <li>Speed: <%= available_data[0].speed %> </li>
+        <% }; %>
+        <% if(available_data[0].song != null){ %>
+            <li>Current song track: <%= available_data[0].song %> </li>
+        <% }; %>
+        <% if(available_data[0].color != null){ %>
+            <li>Color: <%= available_data[0].color %> </li>
+        <% }; %>
+        <% if(available_data[0].timer != null){ %>
+            <li>Timer: <%= available_data[0].timer %> </li>
+        <% }; %>
+        <% if(available_data[0].direction != null){ %>
+            <li>Current direction: <%= available_data[0].direction %> </li>
+        <% }; %>
+    </ul>
+ </p>
+ 
+ </body>
+</html>

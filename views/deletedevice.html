@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <title>This is the Avalon Smart Home</title>
+    </head>
+    <body>
+        <h1> Avalon Smart Home </h1>
+        <h3> Delete Device </h3>
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/adddevice">Add Device</a></li>
+            <li><a href="/devicestatus">Device Status</a></li>
+            <li><a href="/controldevice">Control Device</a></li>
+            <li><a href="/deletedevice">Delete Device</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+        <p>
+            here you can delete the devices-----------
+        </p>
+        <table>
+            <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>type</th>
+            <th>on/off</th>
+            <th>temperature</th>
+            <th>volume</th>
+            <th>brightness</th>
+            <th>speed</th>
+            <th>song</th>
+            <th>color</th>
+            <th>timer</th>
+            <th>direction</th>
+            </tr>
+            <% availabledata.forEach(function(device_d){ %>
+                <tr>
+                    <td><%= device_d.id %></td>
+                    <td><%= device_d.name %></td>
+                    <td><%= device_d.type %></td>
+                    <td><%= device_d.on_off %></td>
+                    <td><%= device_d.temp %></td>
+                    <td><%= device_d.volume %></td>
+                    <td><%= device_d.brightness %></td>
+                    <td><%= device_d.speed %></td>
+                    <td><%= device_d.song %></td>
+                    <td><%= device_d.color %></td>
+                    <td><%= device_d.timer %></td>
+                    <td><%= device_d.direction %></td>
+                </tr>
+            <% }) %>
+        </table>
+        <form action="/deletedevice1" method="POST" onsubmit="validateForm()">
+                <label for="delete_device_selector">Choose a device to delete:</label>
+                <select id="delete_device_selector" name="delete_device_selector">
+                    <% availabledata.forEach(function(device_d){ %>
+                        <option><%= "id number "+device_d.id+" -> "+device_d.name %></option>
+                    <% }) %>
+                    
+                </select>
+                <input type="submit">
+        </form>
+        <script>
+            function validateForm() {
+                alert("deleted sucessfully");
+            }
+        </script>
+    </body>
+</html>
